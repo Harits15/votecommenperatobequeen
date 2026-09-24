@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description"
+        content="Emerald Vote, platform pemilihan internal yang fokus, rahasia, dan mudah digunakan.">
+    <title>The Election | Commenpera's Leaders</title>
+    <!-- Kode Favicon -->
+    <link rel="icon" type="image/x-icon" href="2.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark py-3" aria-label="Navigasi utama">
+        <div class="container">
+            <a class="navbar-brand brand d-flex align-items-center" href="#beranda">
+                <span class="brand-mark">
+                    <img src="Logo.png" alt="Logo Emerald Vote" width="32" height="32">
+                </span>
+                <span>Committed Regional Sumatera Selatan</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                aria-label="Buka menu"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <div class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+                    <a class="nav-link" href="#kandidat">Kandidat</a>
+                    <a class="btn btn-sm btn-outline-light px-3" href="#" data-bs-toggle="modal"
+                        data-bs-target="#adminLoginModal"><i class="fa-solid fa-lock me-2"></i>Akses Admin</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main id="beranda">
+        <section class="hero">
+            <div class="container hero-content">
+                <span class="status-pill"><span class="status-dot"></span>Pemilihan berlangsung</span>
+                <h1>Satu suara untuk arah yang lebih baik.</h1>
+                <p>Kenali kandidat, pahami gagasannya, lalu berikan pilihanmu dengan tenang. Hasil pemilihan dijaga
+                    khusus untuk panitia.</p>
+                <a class="btn btn-emerald px-4 py-3 mt-2" href="#kandidat">Lihat kandidat <i
+                        class="fa-solid fa-arrow-down ms-2"></i></a>
+            </div>
+        </section>
+
+        <section class="trust-band">
+            <div class="container">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="trust-item"><i class="fa-solid fa-fingerprint"></i><span>Suara tercatat di Admin</span></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="trust-item"><i class="fa-solid fa-eye-slash"></i><span>Hasil tidak ditampilkan ke pemilih</span></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="trust-item"><i class="fa-solid fa-shield-halved"></i><span>Dashboard khusus panitia</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-space" id="kandidat">
+            <div class="container">
+                <div class="row align-items-end mb-5">
+                    <div class="col-lg-7">
+                        <div class="section-kicker">Pilihanmu berarti</div>
+                        <h2 class="section-heading">Kenali calon pemimpinmu.</h2>
+                        <p class="section-intro mb-0">Baca profil setiap kandidat sebelum menentukan pilihan.</p>
+                    </div>
+                    <div class="col-lg-5 text-lg-end mt-4 mt-lg-0">
+                        <span class="text-secondary small"><i class="fa-solid fa-circle-info me-1"></i> Pastikan pilihanmu sudah benar sebelum dikirim</span>
+                    </div>
+                </div>
+                <div id="candidateGrid" class="row g-4"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
+            <span><strong class="text-white">Committed Regional Sumatera Selatan</strong> &middot; Pemilihan internal 2026</span>
+            <span>Privasi pemilih adalah prioritas.</span>
+        </div>
+    </footer>
+
+    <div class="modal fade" id="candidateModal" tabindex="-1" aria-labelledby="candidateModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <div class="small text-white-50" id="candidateModalRole"></div>
+                        <h2 class="modal-title h4 mb-0" id="candidateModalTitle"></h2>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <div id="candidateModalContent"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-light" data-bs-dismiss="modal">Tutup</button>
+                    <button id="modalVoteButton" class="btn btn-success"><i class="fa-solid fa-check me-2"></i>Pilih kandidat ini</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirmVoteModal" tabindex="-1" aria-labelledby="confirmVoteTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center p-4 p-md-5">
+                    <div class="d-inline-grid place-items-center rounded-circle p-3 mb-3 vote-success-icon"><i class="fa-solid fa-check-double fa-2x"></i></div>
+                    <h2 class="h4" id="confirmVoteTitle">Konfirmasi pilihan</h2>
+                    <p class="text-secondary mb-4">Kamu akan memilih <strong id="confirmCandidateName"></strong>. Pilihan ini tidak dapat diubah setelah dikirim.</p>
+                    <div class="text-start mb-4">
+                        <label for="voterEmail" class="form-label fw-semibold">Email pemilih</label>
+                        <input id="voterEmail" class="form-control" type="email" autocomplete="email" placeholder="nama@email.com" required>
+                        <div class="form-text">Email digunakan panitia untuk mencatat siapa yang sudah voting.</div>
+                    </div>
+                    <div class="d-flex justify-content-center gap-2">
+                        <button class="btn btn-light" data-bs-dismiss="modal">Periksa lagi</button>
+                        <button id="confirmVoteButton" class="btn btn-success">Kirim suara</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center p-4 p-md-5">
+                    <div class="d-inline-grid rounded-circle p-3 mb-3 vote-success-icon"><i class="fa-solid fa-check fa-2x"></i></div>
+                    <h2 class="h4" id="successTitle">Suaramu sudah tercatat.</h2>
+                    <p class="text-secondary mb-0">Terima kasih telah berpartisipasi. Hasil pemilihan tetap bersifat privat.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="adminLoginModal" tabindex="-1" aria-labelledby="adminLoginTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <div class="small text-white-50">Ruang panitia</div>
+                        <h2 class="modal-title h5 mb-0" id="adminLoginTitle">Akses admin</h2>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+                <form id="adminLoginForm">
+                    <div class="modal-body p-4">
+                        <label for="adminPin" class="form-label fw-semibold">PIN keamanan</label>
+                        <input id="adminPin" class="form-control form-control-lg text-center" inputmode="numeric" maxlength="4" type="password" placeholder="••••" required>
+                        <div id="pinError" class="text-danger small mt-2 d-none">PIN tidak tepat. Coba lagi.</div>
+                        <p class="admin-secret-note mt-3 mb-0"><i class="fa-solid fa-shield-halved me-1"></i> Hasil hanya tersedia untuk admin.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success w-100" type="submit">Buka dashboard</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="adminDashboardModal" tabindex="-1" aria-labelledby="adminDashboardTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <div class="small text-white-50">Private admin result edition</div>
+                        <h2 class="modal-title h4 mb-0" id="adminDashboardTitle">Dashboard hasil pemilihan</h2>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+                <div class="modal-body admin-shell p-3 p-md-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <span class="status-pill dashboard-status"><span class="status-dot"></span>Live simulation</span>
+                        <button id="resetButton" class="btn btn-sm btn-outline-danger"><i class="fa-solid fa-rotate-left me-1"></i>Reset data</button>
+                    </div>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-4">
+                            <div class="stat-card">
+                                <div class="stat-label">Total suara masuk</div>
+                                <div class="stat-value" id="totalVotes">0</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stat-card">
+                                <div class="stat-label">Total kandidat</div>
+                                <div class="stat-value" id="totalCandidates">0</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="stat-card">
+                                <div class="stat-label">Email sudah voting</div>
+                                <div class="stat-value" id="totalVoters">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-lg-7">
+                            <div class="admin-panel">
+                                <h3 class="h5 mb-3">Perolehan suara</h3>
+                                <div class="votes-chart-wrapper"><canvas id="votesChart" aria-label="Grafik perolehan suara kandidat"></canvas></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="admin-panel h-100">
+                                <h3 class="h5 mb-2">Leaderboard</h3>
+                                <p class="small text-secondary">Urutan berdasarkan suara terbanyak.</p>
+                                <div id="leaderboard"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="admin-panel mt-4">
+                        <h3 class="h5 mb-1">Daftar email pemilih</h3>
+                        <p class="small text-secondary mb-3">Email yang tercatat setelah mengirim suara.</p>
+                        <div class="table-responsive">
+                            <table class="table align-middle mb-0">
+                                <thead>
+                                    <tr><th>Email</th><th>Kandidat</th><th>Waktu voting</th></tr>
+                                </thead>
+                                <tbody id="voterList">
+                                    <tr><td colspan="3" class="text-secondary">Belum ada data pemilih.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
